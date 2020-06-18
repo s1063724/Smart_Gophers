@@ -4,15 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/role"
     tools:context=".WelcomeActivity">
 
     <ImageView
         android:id="@+id/img"
-        android:visibility="visible"
-        android:layout_centerHorizontal="true"
-        android:scaleType="fitXY"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        app:srcCompat="@drawable/gp"/>
+        android:layout_width="255dp"
+        android:layout_height="266dp"
+        android:layout_marginTop="116dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/three_brother" />
 
+    <TextView
+        android:id="@+id/txv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Smart Gophers"
+        android:textStyle="bold"
+        android:textColor="#F8052E"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.799" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+

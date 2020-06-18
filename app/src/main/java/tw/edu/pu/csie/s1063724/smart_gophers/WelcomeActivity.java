@@ -6,12 +6,14 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class WelcomeActivity extends AppCompatActivity implements Animation.AnimationListener{
 
     private ImageView imageView;
+    private TextView textView;
     private Context context;
 
     @Override
@@ -30,6 +32,7 @@ public class WelcomeActivity extends AppCompatActivity implements Animation.Anim
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         imageView = (ImageView)findViewById(R.id.img);
+        textView = (TextView) findViewById(R.id.txv);
 
         //imageView 設定動畫元件(透明度調整)
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.welcome_anim);
@@ -37,6 +40,7 @@ public class WelcomeActivity extends AppCompatActivity implements Animation.Anim
         animation.setFillAfter(true);
         animation.setAnimationListener(this);
         imageView.setAnimation(animation);
+        textView.setAnimation(animation);
     }
     /*實作 Animation.AnimationListener 的三種方法*/
     @Override
@@ -44,7 +48,7 @@ public class WelcomeActivity extends AppCompatActivity implements Animation.Anim
 
     @Override
     public void onAnimationEnd(Animation animation) {
-        startActivity(new Intent(context,MainActivity.class));
+        startActivity(new Intent(context, DescriptActivity.class));
         finish();
     }
 
