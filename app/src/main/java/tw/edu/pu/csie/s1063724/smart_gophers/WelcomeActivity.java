@@ -55,7 +55,7 @@ public class WelcomeActivity<btn1Listener> extends AppCompatActivity implements 
 
     @Override
     public void onAnimationEnd(Animation animation) {
-        startActivity(new Intent(context, DescriptActivity.class));
+        startActivity(new Intent(context, MainActivity.class));
         finish();
     }
 

@@ -61,7 +61,7 @@ public class GamelistActivity extends AppCompatActivity {
         fruit1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent main2ActivityIntent = new Intent(GamelistActivity.this, FruitActivity.class);
+                Intent main2ActivityIntent = new Intent(GamelistActivity.this, DrawActivity.class);
                 startActivity(main2ActivityIntent);
             }
         });

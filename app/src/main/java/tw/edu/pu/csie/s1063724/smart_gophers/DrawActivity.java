@@ -3,7 +3,6 @@ package tw.edu.pu.csie.s1063724.smart_gophers;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,9 +11,28 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class FruitActivity extends AppCompatActivity {
+
+public class DrawActivity extends AppCompatActivity {
     Button org1;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_draw);
+
+        //建返回鍵
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        org1 = (Button) findViewById(R.id.org1);
+        org1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent main2ActivityIntent = new Intent(DrawActivity.this, DrawgameActivity.class);
+                startActivity(main2ActivityIntent);
+            }
+        });
+    }
     //實踐返回鍵
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -27,7 +45,7 @@ public class FruitActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.about:
                 Toast.makeText(this, "About Us", Toast.LENGTH_SHORT).show();
-                Intent main2ActivityIntent = new Intent(FruitActivity.this, menuActivity.class);
+                Intent main2ActivityIntent = new Intent(DrawActivity.this, menuActivity.class);
                 startActivity(main2ActivityIntent);
                 break;
 
@@ -37,24 +55,7 @@ public class FruitActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fruit);
 
-        //建返回鍵
-        ActionBar actionBar=getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-
-        org1 = (Button) findViewById(R.id.org1);
-        org1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent main2ActivityIntent = new Intent(FruitActivity.this, FruitgameActivity.class);
-                startActivity(main2ActivityIntent);
-            }
-        });
-    }
 
     //建立清單
     @Override

@@ -11,11 +11,10 @@
         <activity android:name=".menuActivity"></activity>
         <activity android:name=".logoutActivity" />
         <activity android:name=".GamelistActivity" />
-        <activity android:name=".FruitgameActivity" />
-        <activity android:name=".FruitActivity" />
+        <activity android:name=".DrawgameActivity" />
+        <activity android:name=".DrawActivity" />
         <activity android:name=".ColorgameActivity" />
         <activity android:name=".ColorActivity" />
-        <activity android:name=".DescriptActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".WelcomeActivity">
             <intent-filter>
