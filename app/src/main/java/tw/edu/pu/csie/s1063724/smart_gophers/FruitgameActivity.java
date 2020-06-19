@@ -1,7 +1,6 @@
 package tw.edu.pu.csie.s1063724.smart_gophers;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,27 +8,38 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
-    Button btn;
+public class FruitgameActivity extends AppCompatActivity {
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        //實現清單監聽
+        switch (item.getItemId()) {
+            case R.id.about:
+                Toast.makeText(this, "About Us", Toast.LENGTH_SHORT).show();
+                Intent main2ActivityIntent = new Intent(FruitgameActivity.this, menuActivity.class);
+                startActivity(main2ActivityIntent);
+                break;
+
+            default:
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_fruitgame);
+    }
 
-        btn = (Button) findViewById(R.id.btn);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent it = new Intent(MainActivity.this, GamelistActivity.class);
-                startActivity(it);
-            }
-        });
+    //建立清單
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -37,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         if (keyCode==KeyEvent.KEYCODE_BACK){
             AlertDialog.Builder builder=new AlertDialog.Builder(this);
             builder.setTitle("Reminder");
-            builder.setMessage("Do you wanna exit?");
+            builder.setMessage("Don't you wanna play?");
 
             //设置确定按钮
             builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
@@ -54,10 +64,9 @@ public class MainActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    //正常退出
+    //返回遊戲清單
     protected void onDestroy(){
         super.onDestroy();
         System.exit(0);
     }
-
 }
