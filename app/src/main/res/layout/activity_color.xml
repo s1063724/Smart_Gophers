@@ -27,6 +27,7 @@
         android:id="@+id/textView1"
         android:layout_width="283dp"
         android:layout_height="144dp"
+        android:background="#030303"
         android:text="先選擇想挑戰的顏色，遊戲開始即快速點擊相對應的顏色，在限時內獲取自己最高的分數！"
         android:textAlignment="viewStart"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"

@@ -60,7 +60,7 @@
         android:layout_width="215dp"
         android:layout_height="60dp"
         android:background="#ACD6FF"
-        android:text="COLOR"
+        android:text="Gophers"
         android:textColor="#FF0000"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
