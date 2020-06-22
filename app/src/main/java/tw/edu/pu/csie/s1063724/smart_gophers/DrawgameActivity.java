@@ -23,17 +23,26 @@ import android.graphics.Path;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 
-public class DrawgameActivity extends AppCompatActivity {
+public class DrawgameActivity<mPlayer> extends AppCompatActivity {
 
     DrawingView dv ;
     private Paint mPaint;
-
+    MediaPlayer mPlayer;
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        try{
+            mPlayer = MediaPlayer.create(this, R.raw.music);
+            mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            mPlayer.setLooping(true);
+        }catch (IllegalStateException e)
+        {
+            e.printStackTrace();
+        }
         dv = new DrawingView(this);
         setContentView(dv);
         mPaint = new Paint();
@@ -189,9 +198,24 @@ public class DrawgameActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    //返回遊戲清單
-    protected void onDestroy(){
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        mPlayer.start();
+    }
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        mPlayer.pause();
+    }
+    @Override
+    protected void onDestroy()
+    {
         super.onDestroy();
+        mPlayer.release();
         System.exit(0);
     }
 }

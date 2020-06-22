@@ -19,10 +19,11 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
-
-public class ColorActivity extends AppCompatActivity {
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+public class ColorActivity<mPlayer> extends AppCompatActivity {
     Button brown1;
-
+    MediaPlayer mPlayer;
     //實踐返回鍵
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -49,7 +50,14 @@ public class ColorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_color);
-
+        try{
+            mPlayer = MediaPlayer.create(this, R.raw.music);
+            mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            mPlayer.setLooping(true);
+        }catch (IllegalStateException e)
+        {
+            e.printStackTrace();
+        }
         //建返回鍵
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -69,5 +77,23 @@ public class ColorActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
 //        getMenuInflater().inflate(R.menu.menu,menu);
         return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        mPlayer.start();
+    }
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        mPlayer.pause();
+    }
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        mPlayer.release();
     }
 }

@@ -21,13 +21,13 @@ public class menuActivity<mPlayer> extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-//        try{
-//            mPlayer = MediaPlayer.create(this, R.raw.music);
-//            mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-//            mPlayer.setLooping(true);
-//        }catch (IllegalStateException e) {
-//            e.printStackTrace();
-//        }
+        try{
+            mPlayer = MediaPlayer.create(this, R.raw.music);
+            mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            mPlayer.setLooping(true);
+        }catch (IllegalStateException e) {
+            e.printStackTrace();
+        }
 
         return1 = (Button) findViewById(R.id.return1);
         return1.setOnClickListener(new View.OnClickListener() {
@@ -37,22 +37,22 @@ public class menuActivity<mPlayer> extends AppCompatActivity {
             }
         });
     }
-//    @Override
-//    protected void onResume()
-//    {
-//        super.onResume();
-//        mPlayer.start();
-//    }
-//    @Override
-//    protected void onPause()
-//    {
-//        super.onPause();
-//        mPlayer.pause();
-//    }
-//    @Override
-//    protected void onDestroy()
-//    {
-//        super.onDestroy();
-//        mPlayer.release();
-//    }
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        mPlayer.start();
+    }
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        mPlayer.pause();
+    }
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        mPlayer.release();
+    }
 }

@@ -9,20 +9,30 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class WelcomeActivity<btn1Listener> extends AppCompatActivity implements Animation.AnimationListener{
+public class WelcomeActivity<mPlayer> extends AppCompatActivity implements Animation.AnimationListener{
 
     private ImageView imageView;
     private TextView textView;
     private Context context;
-
+    MediaPlayer mPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+        try{
+            mPlayer = MediaPlayer.create(this, R.raw.music);
+            mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            mPlayer.setLooping(true);
+        }catch (IllegalStateException e)
+        {
+            e.printStackTrace();
+        }
         // Set fullscreen
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -61,4 +71,23 @@ public class WelcomeActivity<btn1Listener> extends AppCompatActivity implements 
 
     @Override
     public void onAnimationRepeat(Animation animation) {}
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        mPlayer.start();
+    }
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        mPlayer.pause();
+    }
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        mPlayer.release();
+    }
 }

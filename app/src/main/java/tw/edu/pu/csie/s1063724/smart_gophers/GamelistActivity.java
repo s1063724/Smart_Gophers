@@ -4,7 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,9 +16,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class GamelistActivity extends AppCompatActivity {
+public class GamelistActivity<mPlayer> extends AppCompatActivity {
     Button color1, fruit1;
-
+    MediaPlayer mPlayer;
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         //實現返回鍵監聽
@@ -43,7 +44,14 @@ public class GamelistActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamelist);
-
+        try{
+            mPlayer = MediaPlayer.create(this, R.raw.music);
+            mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            mPlayer.setLooping(true);
+        }catch (IllegalStateException e)
+        {
+            e.printStackTrace();
+        }
         //建返回鍵
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -96,6 +104,24 @@ public class GamelistActivity extends AppCompatActivity {
             builder.show();
         }
         return super.onKeyDown(keyCode, event);
+    }
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        mPlayer.start();
+    }
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        mPlayer.pause();
+    }
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        mPlayer.release();
     }
 
 }

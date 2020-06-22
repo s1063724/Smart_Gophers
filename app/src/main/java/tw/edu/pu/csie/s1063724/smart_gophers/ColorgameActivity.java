@@ -19,12 +19,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import java.lang.ref.WeakReference;
 import java.util.Random;
 
-public class ColorgameActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener {
-
+public class ColorgameActivity<mPlayer> extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener {
+    MediaPlayer mPlayer;
     public static final int CODE = 999;
     public static final int RANDOM_NUMBER = 500;
     private TextView mTextView;
@@ -48,6 +49,14 @@ public class ColorgameActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_colorgame);
+        try{
+            mPlayer = MediaPlayer.create(this, R.raw.music);
+            mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            mPlayer.setLooping(true);
+        }catch (IllegalStateException e)
+        {
+            e.printStackTrace();
+        }
         initView();
     }
 
@@ -184,9 +193,24 @@ public class ColorgameActivity extends AppCompatActivity implements View.OnClick
         return super.onKeyDown(keyCode, event);
     }
 
-    //返回遊戲清單
-    protected void onDestroy() {
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        mPlayer.start();
+    }
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        mPlayer.pause();
+    }
+    @Override
+    protected void onDestroy()
+    {
         super.onDestroy();
+        mPlayer.release();
         System.exit(0);
     }
 }
